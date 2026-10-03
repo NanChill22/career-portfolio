@@ -41,6 +41,14 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link
+                        :href="route('skills.index')"
+                        :active="request()->routeIs('skills.*')"
+                    >
+                        {{ __('Skills') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('cvs.index')" :active="request()->routeIs('cvs.*')">
                         {{ __('CV') }}
                     </x-nav-link>
@@ -230,6 +238,13 @@
                 :active="request()->routeIs('education.*')"
             >
                 {{ __('Education') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link
+                :href="route('skills.index')"
+                :active="request()->routeIs('skills.*')"
+            >
+                {{ __('Skills') }}
             </x-responsive-nav-link>
         </div>
 

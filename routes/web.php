@@ -1,10 +1,12 @@
 <?php
+
+use App\Http\Controllers\CoverLetterController;
+use App\Http\Controllers\CvController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CvController;
-use App\Http\Controllers\CoverLetterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,20 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-
-Route::middleware('auth')->group(function () {
     Route::resource('experiences', ExperienceController::class);
     Route::resource('education', EducationController::class);
-    Route::middleware('auth')->group(function () {
-        // semua route CV
-    Route::resource('cvs', CvController::class)
-    ->middleware('auth');
-    });
-    Route::resource('cover-letters', CoverLetterController::class)
-    ->middleware('auth');
-    
-    
+    Route::resource('skills', SkillController::class);
+    Route::resource('cvs', CvController::class);
+    Route::resource('cover-letters', CoverLetterController::class);
 });
+
 require __DIR__.'/auth.php';
+

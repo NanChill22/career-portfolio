@@ -41,10 +41,18 @@ class User extends Authenticatable
         ];
     }
     /**
- * Get the user's cover letters.
- */
-        public function coverLetters(): HasMany
-        {
-            return $this->hasMany(CoverLetter::class);
-        }
+     * Get the user's cover letters.
+     */
+    public function coverLetters(): HasMany
+    {
+        return $this->hasMany(CoverLetter::class);
+    }
+
+    /**
+     * Get the user's skills.
+     */
+    public function skills(): HasMany
+    {
+        return $this->hasMany(Skill::class);
+    }
 }
