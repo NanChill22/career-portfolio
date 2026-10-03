@@ -28,7 +28,11 @@ class CoverLetterController extends Controller
      */
     public function create(): View
     {
-        return view('cover-letters.create');
+        $user = Auth::user();
+        $skills = $user->skills()->pluck('name')->implode(', ');
+        $latestExp = $user->experiences()->latest('start_date')->first();
+
+        return view('cover-letters.create', compact('user', 'skills', 'latestExp'));
     }
 
     /**
@@ -78,9 +82,13 @@ class CoverLetterController extends Controller
             403
         );
 
+        $user = Auth::user();
+        $skills = $user->skills()->pluck('name')->implode(', ');
+        $latestExp = $user->experiences()->latest('start_date')->first();
+
         return view(
             'cover-letters.edit',
-            compact('coverLetter')
+            compact('coverLetter', 'user', 'skills', 'latestExp')
         );
     }
 
@@ -126,5 +134,35 @@ class CoverLetterController extends Controller
         return redirect()
             ->route('cover-letters.index')
             ->with('success', 'Surat lamaran berhasil dihapus.');
+    }
+
+    /**
+     * Download Surat Lamaran dalam format PDF resmi.
+     */
+    public function downloadPdf(CoverLetter $coverLetter)
+    {
+        abort_unless($coverLetter->user_id === Auth::id(), 403);
+
+        $user = Auth::user();
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cover-letters.templates.pdf', compact('coverLetter', 'user'))
+            ->setPaper('a4', 'portrait');
+
+        $fileName = 'Surat_Lamaran_' . \Illuminate\Support\Str::slug($coverLetter->title . '_' . ($coverLetter->company ?? '')) . '.pdf';
+
+        return $pdf->download($fileName);
+    }
+
+    /**
+     * Preview Surat Lamaran PDF di browser.
+     */
+    public function previewPdf(CoverLetter $coverLetter)
+    {
+        abort_unless($coverLetter->user_id === Auth::id(), 403);
+
+        $user = Auth::user();
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cover-letters.templates.pdf', compact('coverLetter', 'user'))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->stream('preview_surat_lamaran.pdf');
     }
 }

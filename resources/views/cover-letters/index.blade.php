@@ -84,23 +84,34 @@
                                                 <div class="flex items-center justify-center gap-2">
 
                                                     <a href="{{ route('cover-letters.show', $coverLetter) }}"
-                                                       class="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                                                        Lihat
+                                                       class="inline-flex items-center px-3 py-1.5 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 transition">
+                                                        Detail
+                                                    </a>
+
+                                                    <a href="{{ route('cover-letters.preview.pdf', $coverLetter) }}" target="_blank"
+                                                       class="inline-flex items-center px-3 py-1.5 bg-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-700 transition">
+                                                        Preview
+                                                    </a>
+
+                                                    <a href="{{ route('cover-letters.download.pdf', $coverLetter) }}"
+                                                       class="inline-flex items-center px-3 py-1.5 bg-emerald-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-emerald-700 transition">
+                                                        PDF
                                                     </a>
 
                                                     <a href="{{ route('cover-letters.edit', $coverLetter) }}"
-                                                       class="px-3 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">
+                                                       class="inline-flex items-center px-3 py-1.5 bg-amber-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-amber-600 transition">
                                                         Edit
                                                     </a>
 
                                                     <form action="{{ route('cover-letters.destroy', $coverLetter) }}"
                                                           method="POST"
-                                                          onsubmit="return confirm('Yakin ingin menghapus surat lamaran ini?')">
+                                                          onsubmit="return confirm('Yakin ingin menghapus surat lamaran ini?')"
+                                                          class="inline">
                                                         @csrf
                                                         @method('DELETE')
 
                                                         <button type="submit"
-                                                                class="px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                                                                class="inline-flex items-center px-3 py-1.5 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 transition">
                                                             Hapus
                                                         </button>
                                                     </form>

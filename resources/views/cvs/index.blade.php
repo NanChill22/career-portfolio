@@ -78,22 +78,33 @@
                                                 <div class="flex items-center justify-center gap-2">
 
                                                     <a href="{{ route('cvs.show', $cv) }}"
-                                                        class="inline-flex items-center px-3 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
-                                                        Lihat
+                                                        class="inline-flex items-center px-3 py-1.5 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 transition">
+                                                        Detail
+                                                    </a>
+
+                                                    <a href="{{ route('cvs.preview.pdf', $cv) }}" target="_blank"
+                                                        class="inline-flex items-center px-3 py-1.5 bg-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-700 transition">
+                                                        Preview
+                                                    </a>
+
+                                                    <a href="{{ route('cvs.download.pdf', $cv) }}"
+                                                        class="inline-flex items-center px-3 py-1.5 bg-emerald-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-emerald-700 transition">
+                                                        PDF
                                                     </a>
 
                                                     <a href="{{ route('cvs.edit', $cv) }}"
-                                                        class="inline-flex items-center px-3 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 focus:bg-yellow-600 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition">
+                                                        class="inline-flex items-center px-3 py-1.5 bg-amber-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-amber-600 transition">
                                                         Edit
                                                     </a>
 
                                                     <form action="{{ route('cvs.destroy', $cv) }}" method="POST"
-                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus CV ini?');">
+                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus CV ini?');"
+                                                        class="inline">
                                                         @csrf
                                                         @method('DELETE')
 
                                                         <button type="submit"
-                                                            class="inline-flex items-center px-3 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition">
+                                                            class="inline-flex items-center px-3 py-1.5 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 transition">
                                                             Hapus
                                                         </button>
                                                     </form>

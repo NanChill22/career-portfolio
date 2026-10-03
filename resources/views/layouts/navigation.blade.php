@@ -78,6 +78,14 @@
                         {{ __('Surat Lamaran') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link
+                        :href="route('job-applications.index')"
+                        :active="request()->routeIs('job-applications.*')"
+                    >
+                        {{ __('Job Tracker') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -278,6 +286,27 @@
                 :active="request()->routeIs('projects.*')"
             >
                 {{ __('Proyek') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link
+                :href="route('cvs.index')"
+                :active="request()->routeIs('cvs.*')"
+            >
+                {{ __('CV') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link
+                :href="route('cover-letters.index')"
+                :active="request()->routeIs('cover-letters.*')"
+            >
+                {{ __('Surat Lamaran') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link
+                :href="route('job-applications.index')"
+                :active="request()->routeIs('job-applications.*')"
+            >
+                {{ __('Job Tracker') }}
             </x-responsive-nav-link>
         </div>
 

@@ -97,4 +97,52 @@ class CvController extends Controller
             ->route('cvs.index')
             ->with('success', 'CV berhasil dihapus.');
     }
+
+    /**
+     * Download CV dalam format PDF ATS.
+     */
+    public function downloadPdf(Cv $cv)
+    {
+        abort_unless($cv->user_id === Auth::id(), 403);
+
+        $pdf = $this->generatePdf($cv);
+        $fileName = 'CV_' . \Illuminate\Support\Str::slug($cv->title . '_' . Auth::user()->name) . '.pdf';
+
+        return $pdf->download($fileName);
+    }
+
+    /**
+     * Pratinjau (Preview) CV dalam browser (PDF).
+     */
+    public function previewPdf(Cv $cv)
+    {
+        abort_unless($cv->user_id === Auth::id(), 403);
+
+        $pdf = $this->generatePdf($cv);
+
+        return $pdf->stream('preview_cv.pdf');
+    }
+
+    /**
+     * Helper untuk membuat objek PDF dengan data portofolio user.
+     */
+    private function generatePdf(Cv $cv)
+    {
+        $user = Auth::user();
+        $experiences = $user->experiences()->latest('start_date')->get();
+        $educations = $user->education()->latest('start_date')->get();
+        $skills = $user->skills()->orderBy('category')->get();
+        $certifications = $user->certifications()->latest('issue_date')->get();
+        $projects = $user->projects()->latest('start_date')->get();
+
+        return \Barryvdh\DomPDF\Facade\Pdf::loadView('cvs.templates.ats', compact(
+            'cv',
+            'user',
+            'experiences',
+            'educations',
+            'skills',
+            'certifications',
+            'projects'
+        ))->setPaper('a4', 'portrait');
+    }
 }

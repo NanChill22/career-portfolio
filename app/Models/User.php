@@ -71,4 +71,28 @@ class User extends Authenticatable
     {
         return $this->hasMany(Project::class);
     }
+
+    /**
+     * Get the user's experiences.
+     */
+    public function experiences(): HasMany
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    /**
+     * Get the user's education.
+     */
+    public function education(): HasMany
+    {
+        return $this->hasMany(Education::class);
+    }
+
+    /**
+     * Get the user's job applications.
+     */
+    public function jobApplications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
 }
