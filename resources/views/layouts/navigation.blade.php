@@ -146,11 +146,11 @@
                 <x-dropdown align="right" width="48">
 
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center gap-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-lg text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 hover:text-gray-900 dark:hover:text-white focus:outline-none transition ease-in-out duration-150">
+                            <img class="h-7 w-7 rounded-full object-cover ring-2 ring-indigo-500/30" src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}">
+                            <div class="max-w-[120px] truncate">{{ Auth::user()->name }}</div>
 
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
+                            <div>
                                 <svg
                                     class="fill-current h-4 w-4"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -170,10 +170,12 @@
                     <x-slot name="content">
 
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('P') }}
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                <span>{{ __('Data Pribadi') }}</span>
+                            </div>
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -185,7 +187,12 @@
                                 onclick="event.preventDefault();
                                     this.closest('form').submit();"
                             >
-                                {{ __('Log Out') }}
+                                <div class="flex items-center gap-2 text-red-600 dark:text-red-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                    <span>{{ __('Log Out') }}</span>
+                                </div>
                             </x-dropdown-link>
                         </form>
 
@@ -313,20 +320,28 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
 
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">
-                    {{ Auth::user()->name }}
-                </div>
+            <div class="px-4 flex items-center gap-3">
+                <img class="h-10 w-10 rounded-full object-cover ring-2 ring-indigo-500/30" src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}">
+                <div>
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                        {{ Auth::user()->name }}
+                    </div>
 
-                <div class="font-medium text-sm text-gray-500">
-                    {{ Auth::user()->email }}
+                    <div class="font-medium text-sm text-gray-500">
+                        {{ Auth::user()->email }}
+                    </div>
                 </div>
             </div>
 
             <div class="mt-3 space-y-1">
 
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span>{{ __('Data Pribadi') }}</span>
+                    </div>
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -338,7 +353,12 @@
                         onclick="event.preventDefault();
                             this.closest('form').submit();"
                     >
-                        {{ __('Log Out') }}
+                        <div class="flex items-center gap-2 text-red-600 dark:text-red-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            <span>{{ __('Log Out') }}</span>
+                        </div>
                     </x-responsive-nav-link>
                 </form>
 

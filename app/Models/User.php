@@ -11,7 +11,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\CoverLetter;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable([
+    'name',
+    'email',
+    'password',
+    'headline',
+    'phone',
+    'city',
+    'address',
+    'birth_date',
+    'gender',
+    'bio',
+    'avatar',
+    'linkedin_url',
+    'github_url',
+    'portfolio_url',
+])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -38,7 +53,20 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
         ];
+    }
+
+    /**
+     * Get avatar url or fallback default.
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($this->avatar)) {
+            return \Illuminate\Support\Facades\Storage::disk('public')->url($this->avatar);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
     }
     /**
      * Get the user's cover letters.

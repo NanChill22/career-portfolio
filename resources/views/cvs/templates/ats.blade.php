@@ -160,11 +160,30 @@
     {{-- HEADER / CONTACT DETAILS --}}
     <div class="header">
         <h1>{{ $user->name }}</h1>
-        <div class="subtitle">{{ $cv->title }}</div>
+        <div class="subtitle">{{ $user->headline ?: $cv->title }}</div>
         <div class="contact-info">
-            <span>Email: {{ $user->email }}</span>
+            @php
+                $contacts = [];
+                if ($user->email) $contacts[] = '<span>' . e($user->email) . '</span>';
+                if ($user->phone) $contacts[] = '<span>' . e($user->phone) . '</span>';
+                if ($user->city || $user->address) $contacts[] = '<span>' . e($user->city ?: $user->address) . '</span>';
+                if ($user->linkedin_url) $contacts[] = '<a href="' . e($user->linkedin_url) . '" class="link-text">LinkedIn</a>';
+                if ($user->github_url) $contacts[] = '<a href="' . e($user->github_url) . '" class="link-text">GitHub</a>';
+                if ($user->portfolio_url) $contacts[] = '<a href="' . e($user->portfolio_url) . '" class="link-text">Portfolio</a>';
+            @endphp
+            {!! implode(' &bull; ', $contacts) !!}
         </div>
     </div>
+
+    {{-- PROFESSIONAL SUMMARY / ABOUT ME --}}
+    @if ($user->bio)
+        <div class="section">
+            <div class="section-title">Professional Summary</div>
+            <div class="entry-description" style="margin-top: 4px;">
+                {!! nl2br(e($user->bio)) !!}
+            </div>
+        </div>
+    @endif
 
     {{-- WORK EXPERIENCES --}}
     @if ($experiences->count())
