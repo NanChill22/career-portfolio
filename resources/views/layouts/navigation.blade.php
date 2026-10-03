@@ -49,6 +49,22 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link
+                        :href="route('certifications.index')"
+                        :active="request()->routeIs('certifications.*')"
+                    >
+                        {{ __('Sertifikasi') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link
+                        :href="route('projects.index')"
+                        :active="request()->routeIs('projects.*')"
+                    >
+                        {{ __('Proyek') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('cvs.index')" :active="request()->routeIs('cvs.*')">
                         {{ __('CV') }}
                     </x-nav-link>
@@ -245,6 +261,20 @@
                 :active="request()->routeIs('skills.*')"
             >
                 {{ __('Skills') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link
+                :href="route('certifications.index')"
+                :active="request()->routeIs('certifications.*')"
+            >
+                {{ __('Sertifikasi') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link
+                :href="route('projects.index')"
+                :active="request()->routeIs('projects.*')"
+            >
+                {{ __('Proyek') }}
             </x-responsive-nav-link>
         </div>
 

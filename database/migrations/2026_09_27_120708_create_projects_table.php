@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->string('title');
+            $table->string('category')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('project_url')->nullable();
+            $table->string('repository_url')->nullable();
+            $table->string('technologies')->nullable();
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }
@@ -25,3 +39,4 @@ return new class extends Migration
         Schema::dropIfExists('projects');
     }
 };
+

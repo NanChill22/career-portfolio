@@ -55,4 +55,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Skill::class);
     }
+
+    /**
+     * Get the user's certifications.
+     */
+    public function certifications(): HasMany
+    {
+        return $this->hasMany(Certification::class);
+    }
+
+    /**
+     * Get the user's projects.
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
 }

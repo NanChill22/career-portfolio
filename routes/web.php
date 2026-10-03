@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\CoverLetterController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('experiences', ExperienceController::class);
     Route::resource('education', EducationController::class);
     Route::resource('skills', SkillController::class);
+    Route::resource('certifications', CertificationController::class);
+    Route::resource('projects', ProjectController::class);
     Route::resource('cvs', CvController::class);
     Route::resource('cover-letters', CoverLetterController::class);
 });
